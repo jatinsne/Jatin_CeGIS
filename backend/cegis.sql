@@ -271,7 +271,7 @@ CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.
 --
 DROP TABLE IF EXISTS `tehsilname`;
 
-CREATE VIEW `tehsilname`  AS SELECT `a`.`id` AS `id`, `a`.`tehsil_name` AS `tehsil_name`, `a`.`district_id` AS `district_id`, `b`.`district_name` AS `district_name`, `b`.`states_id` AS `states_id`, `b`.`states_name` AS `states_name` FROM (`tehsil` `a` join `districtname` `b` on(`a`.`id` = `b`.`id`)) ;
+CREATE VIEW `tehsilname`  AS SELECT `a`.`id` AS `id`, `a`.`tehsil_name` AS `tehsil_name`, `a`.`district_id` AS `district_id`, `b`.`district_name` AS `district_name`, `b`.`states_id` AS `states_id`, `b`.`states_name` AS `states_name` FROM (`tehsil` `a` join `districtname` `b` on(`a`.`district_id` = `b`.`id`)) ;
 
 --
 -- Indexes for dumped tables
