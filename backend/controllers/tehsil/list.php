@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require(__DIR__ . "/../../database.php");
 
 try {
-    $stmt = $con->prepare("SELECT * FROM `schoolname`");
+    $stmt = $con->prepare("SELECT * FROM `tehsilname`");
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode([

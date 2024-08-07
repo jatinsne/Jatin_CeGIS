@@ -18,6 +18,18 @@ post('/state', 'controllers/states/create.php');
 put('/state', 'controllers/states/update.php');
 delete('/state', 'controllers/states/delete.php');
 
+//District APIs
+get('/district', 'controllers/district/list.php');
+post('/district', 'controllers/district/create.php');
+put('/district', 'controllers/district/update.php');
+delete('/district', 'controllers/district/delete.php');
+
+//Tehsil APIs
+get('/tehsil', 'controllers/tehsil/list.php');
+post('/tehsil', 'controllers/tehsil/create.php');
+put('/tehsil', 'controllers/tehsil/update.php');
+delete('/tehsil', 'controllers/tehsil/delete.php');
+
 //Block APIs
 get('/block', 'controllers/block/list.php');
 post('/block', 'controllers/block/create.php');
