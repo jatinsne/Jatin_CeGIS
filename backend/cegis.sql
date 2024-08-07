@@ -262,7 +262,7 @@ CREATE VIEW `districtname`  AS SELECT `a`.`id` AS `id`, `a`.`district_name` AS `
 --
 DROP TABLE IF EXISTS `schoolname`;
 
-CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`status` AS `status`, `a`.`user_id` AS `user_id`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`district_name` AS `district_name`, `b`.`states_name` AS `states_name`, `c`.`full_name` AS `full_name` FROM ((`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) join `users` `c` on(`a`.`user_id` = `c`.`id`)) ;
+CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`status` AS `status`, `a`.`user_id` AS `user_id`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`district_name` AS `district_name`,`b`.`tehsil_name` AS `tehsil_name`, `b`.`states_name` AS `states_name`, `c`.`full_name` AS `full_name` FROM ((`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) join `users` `c` on(`a`.`user_id` = `c`.`id`)) ;
 
 -- --------------------------------------------------------
 
