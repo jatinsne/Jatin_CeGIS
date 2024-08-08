@@ -1,0 +1,16 @@
+## FULL STACK DEVELOPMENT PROJECT
+
+---
+
+`Username : test`
+`Password : testing`
+
+**RUN the Project**
+
+- [ ] Create Database
+- [ ] Import the DB script from backend folder named cegis.sql
+- [ ] Go to backend folder. Edit your config file. Add database connection in config file
+- [ ] HOST the backend
+- [ ] Go to frontend folder. Edit config.js -> Add the Backend URL
+- [ ] HOST the frontend
+
