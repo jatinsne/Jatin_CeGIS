@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require(__DIR__ . "/../../database.php");
 
 try {
-    $stmt = $con->prepare("SELECT * FROM `assets`");
+    $stmt = $con->prepare("SELECT * FROM `assetview`");
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode([

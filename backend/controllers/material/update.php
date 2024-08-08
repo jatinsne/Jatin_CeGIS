@@ -14,7 +14,7 @@ $quantity_available = (@$_PUT['quantity_available']);
 $quantity_working_condition = (@$_PUT['quantity_working_condition']);
 $schoolid = (@$_PUT['school_id']);
 
-if (empty($name) || empty($id) || empty($schoolid) || empty($quantity_available) || empty($quantity_working_condition) || !isset($_SESSION['userData'][0])) {
+if (empty($name) || empty($id) || empty($schoolid) || empty($quantity_available) || empty($quantity_working_condition)) {
     http_response_code(406);
     echo json_encode([
         "statusCode" => 1,
