@@ -1,7 +1,5 @@
 <?php
 
-header('Content-Type: application/json');
-
 require(__DIR__ . "/../database.php");
 
 $usernm = (@$_POST['username']);

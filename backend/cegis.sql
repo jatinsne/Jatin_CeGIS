@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 06, 2024 at 09:51 AM
+-- Generation Time: Aug 08, 2024 at 09:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+05:30";
+SET time_zone = "+00:00";
 
 --
 -- Database: `cegis`
@@ -28,7 +28,6 @@ CREATE TABLE `assets` (
   `quantity_available` int(11) NOT NULL DEFAULT 0,
   `quantity_working_condition` int(11) NOT NULL DEFAULT 0,
   `quantity_reductant` int(11) NOT NULL DEFAULT 0,
-  `user_id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp()
@@ -38,8 +37,27 @@ CREATE TABLE `assets` (
 -- Dumping data for table `assets`
 --
 
-INSERT INTO `assets` (`id`, `asset_name`, `is_required`, `quantity_available`, `quantity_working_condition`, `quantity_reductant`, `user_id`, `school_id`, `created_on`, `updated_on`) VALUES
-(2, 'Desk', '1', 100, 10, 90, 1, 1, '2024-08-06 13:09:02', '2024-08-06 13:09:02');
+INSERT INTO `assets` (`id`, `asset_name`, `is_required`, `quantity_available`, `quantity_working_condition`, `quantity_reductant`, `school_id`, `created_on`, `updated_on`) VALUES
+(2, 'Desk', '0', 100, 10, 90, 1, '2024-08-06 13:09:02', '2024-08-08 13:04:12');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `assetview`
+-- (See below for the actual view)
+--
+CREATE TABLE `assetview` (
+`id` int(11)
+,`asset_name` varchar(255)
+,`is_required` enum('0','1')
+,`quantity_available` int(11)
+,`quantity_working_condition` int(11)
+,`quantity_reductant` int(11)
+,`school_id` int(11)
+,`created_on` datetime
+,`updated_on` datetime
+,`name` varchar(255)
+);
 
 -- --------------------------------------------------------
 
@@ -125,13 +143,12 @@ CREATE TABLE `schoolname` (
 ,`type` varchar(255)
 ,`block_id` int(11)
 ,`status` enum('0','1')
-,`user_id` int(11)
 ,`created_on` datetime
 ,`updated_on` datetime
 ,`block_name` varchar(255)
+,`tehsil_name` varchar(255)
 ,`district_name` varchar(255)
 ,`states_name` varchar(255)
-,`full_name` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -146,7 +163,6 @@ CREATE TABLE `schools` (
   `type` varchar(255) NOT NULL,
   `block_id` int(11) NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1',
-  `user_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -155,9 +171,9 @@ CREATE TABLE `schools` (
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`id`, `name`, `type`, `block_id`, `status`, `user_id`, `created_on`, `updated_on`) VALUES
-(1, 'Delhi', 'Govt', 1, '1', 1, '2024-08-06 11:51:26', '2024-08-06 12:41:18'),
-(2, 'Delhi', 'Private', 1, '1', 1, '2024-08-06 11:51:42', '2024-08-06 12:41:36');
+INSERT INTO `schools` (`id`, `name`, `type`, `block_id`, `status`, `created_on`, `updated_on`) VALUES
+(1, 'Delhi', 'Govt', 1, '0', '2024-08-06 11:51:26', '2024-08-08 11:14:19'),
+(2, 'Delhi', 'Private', 1, '1', '2024-08-06 11:51:42', '2024-08-06 12:41:36');
 
 -- --------------------------------------------------------
 
@@ -235,7 +251,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `status`, `created_on`, `updated_on`, `last_login`) VALUES
-(1, 'test', 'ae2b1fca515949e5d54fb22b8ed95575', 'Jatin', '1', '2024-08-06 09:55:32', '2024-08-06 09:55:32', '2024-08-06 11:48:47');
+(1, 'test', 'ae2b1fca515949e5d54fb22b8ed95575', 'Jatin', '1', '2024-08-06 09:55:32', '2024-08-06 09:55:32', '2024-08-08 10:51:16');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `assetview`
+--
+DROP TABLE IF EXISTS `assetview`;
+
+CREATE VIEW `assetview`  AS SELECT `a`.`id` AS `id`, `a`.`asset_name` AS `asset_name`, `a`.`is_required` AS `is_required`, `a`.`quantity_available` AS `quantity_available`, `a`.`quantity_working_condition` AS `quantity_working_condition`, `a`.`quantity_reductant` AS `quantity_reductant`, `a`.`school_id` AS `school_id`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`name` AS `name` FROM (`assets` `a` join `schools` `b` on(`a`.`school_id` = `b`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -262,7 +287,7 @@ CREATE VIEW `districtname`  AS SELECT `a`.`id` AS `id`, `a`.`district_name` AS `
 --
 DROP TABLE IF EXISTS `schoolname`;
 
-CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`status` AS `status`, `a`.`user_id` AS `user_id`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`district_name` AS `district_name`,`b`.`tehsil_name` AS `tehsil_name`, `b`.`states_name` AS `states_name`, `c`.`full_name` AS `full_name` FROM ((`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) join `users` `c` on(`a`.`user_id` = `c`.`id`)) ;
+CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`status` AS `status`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`tehsil_name` AS `tehsil_name`, `b`.`district_name` AS `district_name`, `b`.`states_name` AS `states_name` FROM (`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -331,7 +356,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assets`
 --
 ALTER TABLE `assets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `block`
@@ -349,7 +374,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `states`

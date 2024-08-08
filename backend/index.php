@@ -11,6 +11,8 @@ require_once __DIR__ . '/router.php';
 //Core-Auth APIs
 get('/', 'controllers/index.php');
 post('/login', 'controllers/login.php');
+get('/stats', 'controllers/stats.php');
+get('/schoolType', 'controllers/charts/schoolType.php');
 
 //State APIs
 get('/state', 'controllers/states/list.php');
