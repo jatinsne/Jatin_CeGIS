@@ -4,6 +4,7 @@ require(__DIR__ . "/../../database.php");
 
 $name = (@$_POST['name']);
 $type = (@$_POST['type']);
+$udise = (@$_POST['udise']);
 $blockid = (@$_POST['blockid']);
 
 if (empty($name) || empty($type) || empty($blockid)) {
@@ -21,10 +22,11 @@ if (empty($name) || empty($type) || empty($blockid)) {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($rows) <= 0) {
             try {
-                $stmt = $con->prepare("insert into `schools`(name,type,block_id) values(:name,:type,:blockid)");
+                $stmt = $con->prepare("insert into `schools`(name,type,block_id,udise_id) values(:name,:type,:blockid,:udiseid)");
                 $stmt->bindParam(':name', $name, PDO::PARAM_STR);
                 $stmt->bindParam(':type', $type, PDO::PARAM_STR);
                 $stmt->bindParam(':blockid', $blockid, PDO::PARAM_STR);
+                $stmt->bindParam(':udiseid', $udise, PDO::PARAM_STR);
                 $stmt->execute();
             } catch (PDOException $e) {
                 http_response_code(500);

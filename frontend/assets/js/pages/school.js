@@ -42,6 +42,9 @@ function floatchart() {
         data: "name",
       },
       {
+        data: "udise_id",
+      },
+      {
         data: "type",
       },
       {
@@ -68,10 +71,10 @@ function floatchart() {
     ],
     columnDefs: [
       {
-        targets: 8,
+        targets: 9,
         render: function (data, type, full, meta) {
           return `<ul class="list-inline mb-0 text-end">
-              <li class="list-inline-item"><a onclick=edit(this) data-id="${data}" data-tehsilid="${full.block_id}" data-item="${full.name}" data-type="${full.type}" data-status="${full.status}" class="avtar avtar-s btn-link-success btn-pc-default"><i class="ti ti-edit f-20"></i></a></li>
+              <li class="list-inline-item"><a onclick=edit(this) data-udise="${full.udise_id}" data-id="${data}" data-tehsilid="${full.block_id}" data-item="${full.name}" data-type="${full.type}" data-status="${full.status}" class="avtar avtar-s btn-link-success btn-pc-default"><i class="ti ti-edit f-20"></i></a></li>
               <li class="list-inline-item"><a onclick=deleteID(${data}) class="avtar avtar-s btn-link-danger btn-pc-default"><i class="ti ti-trash f-20"></i></a></li>
               </ul>`;
         },
@@ -101,11 +104,12 @@ stateForm.addEventListener("submit", (e) => {
     stateNameField = document.getElementById("stateNameField"),
     typeField = document.getElementById("typeField"),
     statusField = document.getElementById("statusField"),
+    udiseidField = document.getElementById("udiseid"),
     blockidField = document.getElementById("blockid");
   if (idField.value > 0) {
     const requestOptions = {
       method: "PUT",
-      body: `id=${idField.value}&name=${stateNameField.value}&blockid=${blockidField.value}&type=${typeField.value}&status=${statusField.value}`,
+      body: `id=${idField.value}&name=${stateNameField.value}&udise=${udiseidField.value}&blockid=${blockidField.value}&type=${typeField.value}&status=${statusField.value}`,
       headers: {
         Accept: "*/*",
         "Content-Type": "application/x-www-form-urlencoded",
@@ -133,6 +137,7 @@ stateForm.addEventListener("submit", (e) => {
 function openStateModal() {
   document.getElementById("stateNameField").value = "";
   document.getElementById("idField").value = "";
+  document.getElementById("udiseid").value = "";
   tehsilSelect.removeActiveItems();
   typeField.removeActiveItems();
   statusField.removeActiveItems();
@@ -145,9 +150,11 @@ function edit(values) {
     itemValue = values.dataset.item,
     tehsilValue = values.dataset.tehsilid,
     typeValue = values.dataset.type,
+    udiseValue = values.dataset.udise,
     statusValue = values.dataset.status;
   document.getElementById("stateNameField").value = itemValue;
   document.getElementById("idField").value = itemID;
+  document.getElementById("udiseid").value = udiseValue;
   tehsilSelect.setChoiceByValue(parseInt(tehsilValue));
   typeField.setChoiceByValue(typeValue);
   statusField.setChoiceByValue(statusValue);

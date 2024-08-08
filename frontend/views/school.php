@@ -37,6 +37,10 @@ require __DIR__ . "/shared/nav.php";
                                     <div class="modal-body">
                                         <form id="stateForm" autocomplete="off">
                                             <div class="mb-3">
+                                                <label class="form-label">School UDISE ID</label>
+                                                <input name="udise" id="udiseid" required type="text" class="form-control" placeholder="Enter School UDISE ID">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label class="form-label">School Name</label>
                                                 <input name="name" id="stateNameField" required type="text" class="form-control" placeholder="Enter School name">
                                                 <input name="id" id="idField" type="hidden" class="form-control">
@@ -83,6 +87,7 @@ require __DIR__ . "/shared/nav.php";
                                     <tr>
                                         <th>Id</th>
                                         <th>School Name</th>
+                                        <th>UDISE ID</th>
                                         <th>Type</th>
                                         <th>Block</th>
                                         <th>Tehsil</th>
