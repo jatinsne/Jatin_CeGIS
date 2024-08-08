@@ -5,6 +5,9 @@
 `Username : test`
 `Password : testing`
 
+**DB STRUCTURE**
+`MYSQL DB Script in backend > cegis.sql`
+
 **RUN the Project**
 
 - [ ] Create Database
@@ -13,4 +16,3 @@
 - [ ] HOST the backend
 - [ ] Go to frontend folder. Edit config.js -> Add the Backend URL
 - [ ] HOST the frontend
-
