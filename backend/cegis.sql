@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2024 at 09:36 AM
+-- Generation Time: Aug 08, 2024 at 05:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -142,6 +142,7 @@ CREATE TABLE `schoolname` (
 ,`name` varchar(255)
 ,`type` varchar(255)
 ,`block_id` int(11)
+,`udise_id` int(11)
 ,`status` enum('0','1')
 ,`created_on` datetime
 ,`updated_on` datetime
@@ -159,6 +160,7 @@ CREATE TABLE `schoolname` (
 
 CREATE TABLE `schools` (
   `id` int(11) NOT NULL,
+  `udise_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `block_id` int(11) NOT NULL,
@@ -171,9 +173,10 @@ CREATE TABLE `schools` (
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`id`, `name`, `type`, `block_id`, `status`, `created_on`, `updated_on`) VALUES
-(1, 'Delhi', 'Govt', 1, '0', '2024-08-06 11:51:26', '2024-08-08 11:14:19'),
-(2, 'Delhi', 'Private', 1, '1', '2024-08-06 11:51:42', '2024-08-06 12:41:36');
+INSERT INTO `schools` (`id`, `udise_id`, `name`, `type`, `block_id`, `status`, `created_on`, `updated_on`) VALUES
+(1, 10001, 'Delhi', 'Govt', 2, '1', '2024-08-06 11:51:26', '2024-08-08 21:03:16'),
+(2, 10002, 'Delhi', 'Private', 1, '0', '2024-08-06 11:51:42', '2024-08-08 21:02:50'),
+(4, 10003, 'DPS', 'Private', 2, '1', '2024-08-08 21:01:57', '2024-08-08 21:01:57');
 
 -- --------------------------------------------------------
 
@@ -287,7 +290,7 @@ CREATE VIEW `districtname`  AS SELECT `a`.`id` AS `id`, `a`.`district_name` AS `
 --
 DROP TABLE IF EXISTS `schoolname`;
 
-CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`status` AS `status`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`tehsil_name` AS `tehsil_name`, `b`.`district_name` AS `district_name`, `b`.`states_name` AS `states_name` FROM (`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) ;
+CREATE VIEW `schoolname`  AS SELECT `a`.`id` AS `id`, `a`.`name` AS `name`, `a`.`type` AS `type`, `a`.`block_id` AS `block_id`, `a`.`udise_id` AS `udise_id`, `a`.`status` AS `status`, `a`.`created_on` AS `created_on`, `a`.`updated_on` AS `updated_on`, `b`.`block_name` AS `block_name`, `b`.`tehsil_name` AS `tehsil_name`, `b`.`district_name` AS `district_name`, `b`.`states_name` AS `states_name` FROM (`schools` `a` join `blockname` `b` on(`a`.`block_id` = `b`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -325,7 +328,8 @@ ALTER TABLE `district`
 -- Indexes for table `schools`
 --
 ALTER TABLE `schools`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_udiseid` (`udise_id`);
 
 --
 -- Indexes for table `states`
@@ -374,7 +378,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `states`
