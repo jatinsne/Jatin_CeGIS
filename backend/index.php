@@ -9,6 +9,7 @@ session_start();
 require_once __DIR__ . '/router.php';
 
 //Core-Auth APIs
+any('/404', 'controllers/404.php');
 get('/', 'controllers/index.php');
 post('/login', 'controllers/login.php');
 get('/stats', 'controllers/stats.php');

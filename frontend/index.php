@@ -4,6 +4,7 @@ session_start();
 
 require_once __DIR__ . '/router.php';
 
+any('/404', 'views/404.php');
 get("/", "views/login.php");
 get("/login", "views/login.php");
 get("/logout", "views/logout.php");
