@@ -9,7 +9,6 @@ session_start();
 require_once __DIR__ . '/router.php';
 
 //Core-Auth APIs
-any('/404', 'controllers/404.php');
 get('/', 'controllers/index.php');
 post('/login', 'controllers/login.php');
 get('/stats', 'controllers/stats.php');
@@ -50,3 +49,6 @@ get('/material', 'controllers/material/list.php');
 post('/material', 'controllers/material/create.php');
 put('/material', 'controllers/material/update.php');
 delete('/material', 'controllers/material/delete.php');
+
+
+any('/404', 'controllers/404.php');
