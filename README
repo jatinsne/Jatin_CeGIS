@@ -6,13 +6,12 @@
 `Password : testing`
 
 **DB STRUCTURE**
-`MYSQL DB Script in backend > cegis.sql`
+`MYSQL DB Script in api > cegis.sql`
 
 **RUN the Project**
 
 - [ ] Create Database
-- [ ] Import the DB script from backend folder named cegis.sql
-- [ ] Go to backend folder. Edit your config file. Add database connection in config file
-- [ ] HOST the backend
-- [ ] Go to frontend folder. Edit config.js -> Add the Backend URL
-- [ ] HOST the frontend
+- [ ] Import the DB script from api folder named cegis.sql
+- [ ] Go to api folder. Edit your config file. Add database connection in config file
+- [ ] Go to root folder. Edit config.js -> Add the api URL (Add a forward slash at end)
+- [ ] HOST the project
